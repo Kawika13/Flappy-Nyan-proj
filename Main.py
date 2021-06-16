@@ -22,7 +22,8 @@ v_pipes = -2
 pipe_n = 3
 objColor = (255, 100, 0)
 
-radius = 20 # Pg circle radius
+wide = 20
+high = 20 
 
 # Variables (Physics)
 x = 150   # starting point (x)
@@ -54,9 +55,9 @@ heights3()
 # Graphic render func
 def render():
   # Varibles
-  global x, y, radius
+  global x, y, high, wide
   screen.fill((100, 100, 255))
-  pygame.draw.circle(screen, objColor, (x,y), radius, 0)
+  pygame.draw.rect(screen, objColor, (x,y, wide, high))
   pygame.display.flip()
 
 # Pipes generator func
@@ -86,14 +87,25 @@ def clouds():
   pygame.display.flip()
 
 def collision():
-  global pipe_x,pipe_width,pipe_height,i,x,y
+  global x1,x2,x3,pipe_width,x,y,height1,height2,height3,height21,height22,height23,high,wide,v_pipes,vy
+  if x1 - wide < x < x1 + pipe_width:
+   if not height1 < y < 300 - height21 - high:
+     v_pipes = 0
+     vy=0
+  if x2-wide<x<x2+pipe_width:  
+   if not height2<y<300-height22-high:
+     v_pipes=0
+     vy=0
+  if x3-wide<x<x3+pipe_width:
+   if not height3<y<300-height23-high:
+     v_pipes = 0
+     vy = 0
   
 def border_collision():
   global x,y,radius,vy,v_pipes
-  if y-radius<=0 or y+radius>=300:
-    pass
-    #vy=0
-    #v_pipes=0
+  if y<=0 or y+high>=300:
+    v_pipes = 0
+    vy = 0
 
 # Frame scroller func
 def Next_State():
@@ -102,8 +114,7 @@ def Next_State():
   # Varibles
   global pipe_x, v_pipes, x, y, vx, vy, x1, x2, x3, start
   keys = pygame.key.get_pressed()
-  if collision()==True:
-    print("collision")
+  collision()
   border_collision()
   if vy == 0:
     pass
@@ -133,5 +144,3 @@ while True:
   clouds()
   Next_State()
   sleep(0.01)
-
-# TODO: pipe's collision, point system, win(?) and lose(!), graphics
