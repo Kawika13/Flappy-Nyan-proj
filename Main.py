@@ -25,15 +25,15 @@ objColor = (255, 100, 0)
 wide = 30
 high = 30 
 jump = True
-BirdImg=pygame.image.load("bird.png")
-Bird=pygame.transform.scale(BirdImg,(wide,high),)
+BirdImg = pygame.image.load("bird.png")
+Bird = pygame.transform.scale(BirdImg, (wide, high))
 # Variables (Physics)
 x = 150   # starting point (x)
 y = 150   # starting point (y)
 vy = 0.1  # y axe velocity
 
 def heights1():
-  global height1,height21
+  global height1, height21
   for i in range(0, pipe_n):
     height1 = randrange(50, 80)
     height21 = randrange(90,130)
@@ -41,14 +41,14 @@ def heights1():
 def heights2():
   global height2,height22
   for i in range(0, pipe_n):
-   height2 = randrange(90, 130)
-   height22 = randrange(50,80)
+    height2 = randrange(90, 130)
+    height22 = randrange(50,80)
 
 def heights3():
   global height3,height23
   for i in range(0, pipe_n):
-   height3 = randrange(60, 110)
-   height23 = randrange(60,110)
+    height3 = randrange(60, 110)
+    height23 = randrange(60,110)
 
 heights1()
 heights2()
@@ -57,34 +57,34 @@ heights3()
 # Graphic render func
 def render():
   # Varibles
-  global x, y, high, wide,Bird
+  global x, y, high, wide, Bird
   screen.fill((100, 100, 255))
-  screen.blit(Bird,(x,y))
+  screen.blit(Bird, (x, y))
 
 # Pipes generator func
 def Pipes():
   # Variables
-  global pipe_width, pipe_color,space,pipe_width,x1,x2,x3,height1,height2,height3,height21,height22,height23
+  global pipe_width, pipe_color, space, pipe_width, x1, x2, x3, height1, height2, height3, height21, height22, height23
   #1
-  pygame.draw.rect(screen,pipe_color,(x1, 0, pipe_width, height1))
-  pygame.draw.rect(screen,pipe_color,(x1, 300 - height21,pipe_width, height21))
+  pygame.draw.rect(screen, pipe_color, (x1, 0, pipe_width, height1))
+  pygame.draw.rect(screen, pipe_color, (x1, 300 - height21, pipe_width, height21))
   #2
-  pygame.draw.rect(screen,pipe_color,(x2, 0, pipe_width, height2))
-  pygame.draw.rect(screen,pipe_color,(x2, 300 - height22,pipe_width, height22))
+  pygame.draw.rect(screen, pipe_color, (x2, 0, pipe_width, height2))
+  pygame.draw.rect(screen, pipe_color, (x2, 300 - height22, pipe_width, height22))
   #3
-  pygame.draw.rect(screen,pipe_color,(x3, 0, pipe_width, height3))
-  pygame.draw.rect(screen,pipe_color,(x3, 300 - height23,pipe_width, height23))
+  pygame.draw.rect(screen, pipe_color, (x3, 0, pipe_width, height3))
+  pygame.draw.rect(screen, pipe_color, (x3, 300 - height23, pipe_width, height23))
 
 def clouds():
-  pygame.draw.circle(screen,(255,255,255),(0,20),50,0)
-  pygame.draw.circle(screen,(255,255,255),(0,80),50,0)
-  pygame.draw.circle(screen,(255,255,255),(0,120),50,0)
-  pygame.draw.circle(screen,(255,255,255),(0,180),50,0)
-  pygame.draw.circle(screen,(255,255,255),(0,240),50,0)
-  pygame.draw.circle(screen,(255,255,255),(0,280),50,0)
+  pygame.draw.circle(screen, (255, 255, 255), (0, 20), 50, 0)
+  pygame.draw.circle(screen, (255, 255, 255), (0, 80), 50, 0)
+  pygame.draw.circle(screen, (255, 255, 255), (0, 120), 50, 0)
+  pygame.draw.circle(screen, (255, 255, 255), (0, 180), 50, 0)
+  pygame.draw.circle(screen, (255, 255, 255), (0, 240), 50, 0)
+  pygame.draw.circle(screen, (255, 255, 255), (0, 280), 50, 0)
 
 def collision():
-  global x1,x2,x3,pipe_width,x,y,height1,height2,height3,height21,height22,height23,high,wide,v_pipes,vy
+  global x1, x2, x3, pipe_width, x, y, height1, height2, height3, height21, height22, height23, high, wide, v_pipes, vy
   if x1 - wide < x < x1 + pipe_width:
    if not height1 < y < 300 - height21 - high:
      v_pipes = 0
@@ -99,8 +99,8 @@ def collision():
      vy = 0
   
 def border_collision():
-  global x,y,radius,vy,v_pipes
-  if y<=0 or y+high>=300:
+  global x, y, radius, vy, v_pipes
+  if y <= 0 or y + high >= 300:
     v_pipes = 0
     vy = 0
 
